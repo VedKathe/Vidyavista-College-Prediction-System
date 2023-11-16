@@ -1,0 +1,24 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    min-height: 100vh;
+    
+    
+  }
+  .back{
+    background-image:url(https://mdbootstrap.com/img/new/textures/full/171.jpg);
+    vertical-align: middle;
+    text-align: center;
+    line-height: 150px;
+    height: 300px;
+    font-weight: 800;
+    font-size: 40px;
+    color: #000;
+    width: 100%;
+    background-size: cover;
+    background-position: 0 25%; 
+    background-repeat: no-repeat;
+    margin-bottom: -150px;
+  }

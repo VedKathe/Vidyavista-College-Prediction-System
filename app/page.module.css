@@ -3,8 +3,27 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
+ 
   min-height: 100vh;
+  
+}
+
+.image{
+  background-image: url('/slider.jpg');
+  
+    vertical-align: middle;
+    text-align: center;
+    line-height: 90vh;
+    width: 100vw; 
+    height: 100vh;
+    font-weight: 800;
+    font-size: 50px;
+    color: #ffffff;
+    width: 100%;
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+    word-break: keep-all;
 }
 
 .description {
