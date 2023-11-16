@@ -1,8 +1,8 @@
 import React from 'react'
 
-import LoginForm from '../components/loginForm'
+import LoginForm from '../components/loginForm/loginForm'
 import styles from './student.module.css'
-import Registration from '../components/register'
+import Registration from '../components/register/register'
 
 function page() {
   return (

@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import './bootstrap.min.css'
-import Navbar from './components/navbar'
+import Navbar from './components/navbar/navbar'
 import Script from 'next/script'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import "@fortawesome/fontawesome-free/css/all.min.css"
