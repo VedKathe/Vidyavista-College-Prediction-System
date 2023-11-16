@@ -8,23 +8,23 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 function Index() {
-  const [user, setUser] = React.useState("");
-  const [pass, setPass] = React.useState("");
-  const router = useRouter()
+  // const [user, setUser] = React.useState("");
+  // const [pass, setPass] = React.useState("");
+  // const router = useRouter()
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
     
     
-    axios.post('/api/auth',{ user:user , pass:pass}).then((response) => {
-        console.log(response.data);
-        router.push('/')
-      });
-  };
+  //   axios.post('/api/auth',{ user:user , pass:pass}).then((response) => {
+  //       console.log(response.data);
+  //       router.push('/')
+  //     });
+  // };
   return (
     <div className={styles["body"]} >
       <section className={styles["container"]} style={{background: 'hsla(0, 0%, 100%, 0.6)', backdropFilter: 'blur(30px)'}}>
-        <form action="/" onSubmit={handleSubmit} className={styles["form"]}>
+        <form action="/"  className={styles["form"]}>
           <div className={styles["input-box"]}>
             <label>Email Address</label>
             

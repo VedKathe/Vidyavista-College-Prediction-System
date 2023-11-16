@@ -8,14 +8,14 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Index() {
-    const [isAdmin, setisAdmin] = useState(false);
+    // const [isAdmin, setisAdmin] = useState(false);
 
-    useEffect(() => {
-        axios.get('/api/auth/getlogin').then((response) => {
-            console.log(response.data);
+    // useEffect(() => {
+    //     axios.get('/api/auth/getlogin').then((response) => {
+    //         console.log(response.data);
             
-          });
-    }, [])
+    //       });
+    // }, [])
     
 
   return (

@@ -8,52 +8,52 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 function Index() {
-   const [pass, setPass] = React.useState("kathe");
-    const [user, setUser] = React.useState("vedant");
+  //  const [pass, setPass] = React.useState("kathe");
+  //   const [user, setUser] = React.useState("vedant");
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  const [formData, setFormData] = React.useState({
-    collageName: "",
-    university: "",
-    zipCode: "",
-    phoneNo: "",
-    CS: "",
-    Civil: "",
-    mech: "",
-    ENTC: "",
-  });
+  // const [formData, setFormData] = React.useState({
+  //   collageName: "",
+  //   university: "",
+  //   zipCode: "",
+  //   phoneNo: "",
+  //   CS: "",
+  //   Civil: "",
+  //   mech: "",
+  //   ENTC: "",
+  // });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch("/api/register", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
 
-      if (response.ok) {
-        // Handle success (e.g., show a success message)
-        console.log("Form submitted successfully");
-      } else {
-        // Handle errors (e.g., show an error message)
-        console.error("Form submission failed");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
+  //     if (response.ok) {
+  //       // Handle success (e.g., show a success message)
+  //       console.log("Form submitted successfully");
+  //     } else {
+  //       // Handle errors (e.g., show an error message)
+  //       console.error("Form submission failed");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //   }
+  // };
 
   return (
     <div className={styles["body"]}>
