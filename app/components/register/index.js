@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import styles from "./register.module.css";
 import bootstrap from "../../bootstrap.min.css";

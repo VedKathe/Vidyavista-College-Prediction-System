@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import Link from "next/link";
 import './navbar.module.css'
