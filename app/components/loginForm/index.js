@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+
 "use client";
 import React from "react";
 import styles from "./loginForm.module.css";
@@ -7,7 +7,7 @@ import { handleClientScriptLoad } from "next/script";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-function index() {
+function Index() {
   const [user, setUser] = React.useState("");
   const [pass, setPass] = React.useState("");
   const router = useRouter()
@@ -62,4 +62,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

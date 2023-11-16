@@ -1,5 +1,5 @@
 'use client'
-/* eslint-disable react-hooks/rules-of-hooks */
+
 import React from "react";
 import Link from "next/link";
 import './navbar.module.css'
@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 
-export default function index() {
+export default function Index() {
     const [isAdmin, setisAdmin] = useState(false);
 
     useEffect(() => {

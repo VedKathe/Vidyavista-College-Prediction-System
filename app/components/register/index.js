@@ -1,5 +1,5 @@
 "use client";
-/* eslint-disable react-hooks/rules-of-hooks */
+
 import React from "react";
 import styles from "./register.module.css";
 import bootstrap from "../../bootstrap.min.css";
@@ -7,9 +7,10 @@ import { handleClientScriptLoad } from "next/script";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-function index() {
-  const [user, setUser] = React.useState("");
-  const [pass, setPass] = React.useState("");
+function Index() {
+   const [pass, setPass] = React.useState("kathe");
+    const [user, setUser] = React.useState("vedant");
+
   const router = useRouter();
 
   const [formData, setFormData] = React.useState({
@@ -144,4 +145,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;
