@@ -6,25 +6,38 @@ import bootstrap from "../../bootstrap.min.css";
 import { handleClientScriptLoad } from "next/script";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-function Index() {
-  // const [user, setUser] = React.useState("");
-  // const [pass, setPass] = React.useState("");
-  // const router = useRouter()
+function Index({...props}) {
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
+ 
+  const [user, setUser] = React.useState("");
+  const [pass, setPass] = React.useState("");
+  const [admin, setadmin] = React.useState(false)
+  const router = useRouter()
+  const {isAdmin}= props
+ 
+
+  useEffect(() => {
+    if(isAdmin==1){
+      setadmin(true)
+    }
+
+  }, [])
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
     
-    
-  //   axios.post('/api/auth',{ user:user , pass:pass}).then((response) => {
-  //       console.log(response.data);
-  //       router.push('/')
-  //     });
-  // };
+    console.log(isAdmin);
+    // axios.post('/api/auth',{ user:user , pass:pass}).then((response) => {
+    //     console.log(response.data);
+    //     router.push('/')
+    //   });
+  };
   return (
     <div className={styles["body"]} >
       <section className={styles["container"]} style={{background: 'hsla(0, 0%, 100%, 0.6)', backdropFilter: 'blur(30px)'}}>
-        <form action="/"  className={styles["form"]}>
+        <form action="/" onSubmit={handleSubmit}  className={styles["form"]}>
           <div className={styles["input-box"]}>
             <label>Email Address</label>
             
@@ -46,16 +59,16 @@ function Index() {
             />
           </div>
 
-          <div className=" d-flex row mb-4 mt-5 justify-content-center">
+          {!isAdmin && <div className=" d-flex row  mt-5 justify-content-center">
             <div className="col d-flex justify-content-center">
-                <a href="/student/register">Register</a>
+              <a href="/student/register">Register</a>
             </div>
 
             <div className="col">
               <a href="#!">Forgot password?</a>
             </div>
-          </div>
-          <button className="btn-warning">Login</button>
+          </div>}
+          <button className="btn-warning mt-5">Login</button>
         </form>
       </section>
     </div>

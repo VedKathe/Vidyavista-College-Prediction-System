@@ -1,19 +1,14 @@
 import React from 'react'
+import './contact.module.css'
 
 function index() {
   return (
     <section id="contact" className="contact section-padding">
-        <div className="container mt-5 mb-5">
-            <div className="row">
-                <div className="col-md-12">
-                    <div className="section-header text-center pb-5">
-                        <h2>Contact Us</h2>
-                    </div>
-                </div>
-            </div>
-			<div className="row m-0">
+        <div className="container  mb-5 ">
+            
+			<div className="row m-0 ">
 				<div className="col-md-12 p-0 pt-4 pb-4">
-					<form action="#" className="bg-light p-4 m-auto">
+					<form action="#" className="bg-light p-4 m-auto ">
 						<div className="row">
 							<div className="col-md-12">
 								<div className="mb-3">

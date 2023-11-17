@@ -14,7 +14,7 @@ useEffect(()=>{
   return (
     <div className={styles['main']}>
      <div className={styles['back']}>Admin Login</div>
-      <LoginForm/>
+      <LoginForm isAdmin='1'/>
     </div>
   )
 }

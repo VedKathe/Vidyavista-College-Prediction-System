@@ -65,20 +65,38 @@ function Index() {
         }}
       >
         <form action="#" className={styles["form"]}>
+        <div className={styles["input-box"]}>
+              <label>Email</label>
+              <input type="text" placeholder="Enter Email..." required />
+            </div>
+            <div className={styles["input-box"]}>
+              <label>Password</label>
+              <input type="text" placeholder="Enter Password..." required />
+            </div>
           <div className={styles["column"]}>
             <div className={styles["input-box"]}>
               <label>Name</label>
               <input type="text" placeholder="Enter Name..." required />
             </div>
             <div className={styles["input-box"]}>
-              <label>Phone no</label>
-              <input type="number" placeholder="Enter Number..." required />
+            <label>Gender</label>
+            <div className={styles["select-box"]}>
+
+              <select>
+                
+                <option>Male</option>
+                <option>Female</option>
+                <option>Prefer not to say</option>
+                
+              </select>
+            </div>
             </div>
           </div>
+          
           <div className={styles["column"]}>
-            <div className={styles["input-box"]}>
-              <label>Email</label>
-              <input type="text" placeholder="Enter Email..." required />
+          <div className={styles["input-box"]}>
+              <label>Phone no</label>
+              <input type="number" placeholder="Enter Number..." required />
             </div>
             <div className={styles["input-box"]}>
               <label>Address</label>
@@ -96,14 +114,8 @@ function Index() {
             </div>
           </div>
           <div className={styles["column"]}>
-            <div className={styles["input-box"]}>
-              <label>Gender</label>
-              <input type="text" placeholder="Enter Gender..." required />
-            </div>
-            <div className={styles["input-box"]}>
-              <label>Password</label>
-              <input type="text" placeholder="Enter Password..." required />
-            </div>
+            
+            
           </div>
           {/* <div className={`${styles["input-box"]} ${styles["address"]}`}>
             <label>Deparments</label>
@@ -138,7 +150,7 @@ function Index() {
             </div>
           </div> */}
           
-          <button>Submit</button>
+          <button className="btn-warning">Submit</button>
         </form>
       </section>
     </div>

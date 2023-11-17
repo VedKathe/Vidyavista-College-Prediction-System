@@ -5,6 +5,7 @@ import Navbar from './components/navbar/navbar'
 import Script from 'next/script'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import "@fortawesome/fontawesome-free/css/all.min.css"
+import Footer from './components/footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,11 +20,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Navbar/>
         {children}
-        <footer className="bg-dark p-2 text-center">
-          <div className="container">
-              <p className="text-white">All Right Reserved By Vidyavista</p>
-          </div>
-      </footer>
+        <Footer/>
         </body>
         <Script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"

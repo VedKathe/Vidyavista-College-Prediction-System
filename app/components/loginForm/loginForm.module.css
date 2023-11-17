@@ -34,11 +34,12 @@
 }
 
 .input-box input{
-    padding: 30px;
+    padding: 25px;
 }
 
 .input-box label {
   color: #333;
+  font-size: 16px;
 }
 .form :where(.input-box input, .select-box) {
   position: relative;

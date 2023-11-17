@@ -19,7 +19,7 @@ export default function Index() {
     
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div className="container">
         <a className="navbar-brand" href="#">
           <span className="text-warning">Vidya</span>vista
@@ -38,18 +38,23 @@ export default function Index() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" href="/">
+              <Link className="nav-link" href="/student/home">
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/student">
-                Student
+              <Link className="nav-link" href="#search">
+                Search
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/admin">
-                Admin
+              <Link className="nav-link" href="/student/feedback">
+                Feedback
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" href="/">
+                Logout
               </Link>
             </li>
           </ul>

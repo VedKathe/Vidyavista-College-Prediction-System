@@ -4,10 +4,11 @@
     align-items: center;
     
     min-height: 100vh;
-    
+    margin-top: 4rem;
     
   }
   .back{
+    
     background-image:url(/hero-bg2.jpg);
     vertical-align: middle;
     text-align: center;
@@ -19,5 +20,5 @@
     width: 100%;background-size: cover;
     background-position: 0 35%; 
     background-repeat: no-repeat;
-    margin-bottom: -200px;
+    margin-bottom: -160px;
   }
