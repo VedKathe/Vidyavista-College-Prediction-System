@@ -3,7 +3,9 @@ import Contact from '../../components/contactus'
 import styles from './feedback.module.css'
 import Navbar from '../../components/navbar2'
 
-function page() {
+function Page() {
+ 
+
   return (
 	<div>
 		<Navbar/>
@@ -22,4 +24,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

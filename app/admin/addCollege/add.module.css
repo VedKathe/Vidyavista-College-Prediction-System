@@ -1,0 +1,23 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+    min-height: 100vh;
+    
+    
+  }
+  .back{
+    background-image:url(/hero-bg2.jpg);
+    vertical-align: middle;
+    text-align: center;
+    line-height: 200px;
+    height: 350px;
+    font-weight: 800;
+    font-size: 40px;
+    color: #000;
+    width: 100%;background-size: cover;
+    background-position: 0 35%; 
+    background-repeat: no-repeat;
+    margin-bottom: -170px;
+  }

@@ -33,6 +33,13 @@ function Index({...props}) {
     //     console.log(response.data);
     //     router.push('/')
     //   });
+    if(admin)
+    {
+      router.push('/admin/home')
+    }
+    else{
+      router.push('/student/home')
+    }
   };
   return (
     <div className={styles["body"]} >
