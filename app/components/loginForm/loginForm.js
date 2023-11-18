@@ -28,17 +28,36 @@ function Index({...props}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    console.log(isAdmin);
+    
     // axios.post('/api/auth',{ user:user , pass:pass}).then((response) => {
     //     console.log(response.data);
     //     router.push('/')
     //   });
     if(admin)
     {
-      router.push('/admin/home')
+      axios.post('/api/auth/getadmin',{ email:user , password:pass}).then((response) => {
+        console.log(response.data);
+        if (response.data==true){
+          router.push('/admin/home')
+        }
+        else{
+          alert("Wrong user")
+        }
+      });
+
+     
     }
     else{
-      router.push('/student/home')
+      axios.post('/api/auth/getlogin',{ email:user , password:pass}).then((response) => {
+        console.log(response.data);
+        if (response.data==true){
+          router.push('/student/home')
+        }
+        else{
+          alert("Wrong user")
+        }
+      });
+      //router.push('/student/home')
     }
   };
   return (

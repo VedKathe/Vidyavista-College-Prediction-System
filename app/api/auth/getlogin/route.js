@@ -1,10 +1,34 @@
 
-import { cookies } from 'next/headers'
 
+import { NextResponse } from 'next/server'
+import { sql } from "@vercel/postgres";
+import { createPool } from "@vercel/postgres";
+import { createClient } from "@vercel/postgres";
 
-export async function GET(req) {
+export async function POST(request){
+    const PostData = await request.json();
+    const {
+       email, password
+      } = PostData;
     
-    const cookieStore = cookies()
-     
-    return new Response(JSON.stringify(cookies().get('isAdmin')));
+      const pool = new createPool({
+        connectionString: process.env.POSTGRES_URL, // Your PostgreSQL connection string
+      });
+
+      
+        const insertQuery = `
+            select email, password_hash from user_table
+        `;
+
+        const {rows} = await pool.query(insertQuery);
+
+        
+        const foundUser = rows.find(
+            user => user.email === email && user.password_hash === password
+          );
+        
+
+    //Close connection
+
+    return NextResponse.json(!!foundUser,{status:"200"})
 }
