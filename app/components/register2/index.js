@@ -55,6 +55,56 @@ function Index() {
   //   }
   // };
 
+
+  const initialFormData = {
+    name: "",
+    address: "",
+    zip_code: "",
+    phone: "",
+    comp: "",
+    it: "",
+    civil: "",
+    mech: "",
+    entc: "",
+    chemical: "",
+  };
+
+  const [formData, setFormData] = React.useState(initialFormData);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/registerClg", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Handle success (e.g., show a success message)
+        setFormData(initialFormData);
+
+        alert("Form Submitted");
+        console.log("Form submitted successfully");
+      } else {
+        // Handle errors (e.g., show an error message)
+        console.error("Form submission failed");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
+
   return (
     <div className={styles["body"]}>
       <section
@@ -64,60 +114,127 @@ function Index() {
           backdropFilter: "blur(30px)",
         }}
       >
-        <form action="#" className={styles["form"]}>
-        <div className={styles["input-box"]}>
-              <label>Collage Name</label>
-              <input type="text" placeholder="Enter Collage..." required />
-            </div>
-            <div className={styles["input-box"]}>
-              <label>Address</label>
-              <input type="text" placeholder="Enter Address..." required />
-            </div>
+        <form action="#" onSubmit={handleSubmit} className={styles["form"]}>
+          <div className={styles["input-box"]}>
+            <label>Collage Name</label>
+            <input
+              type="text"
+              placeholder="Enter Collage..."
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className={styles["input-box"]}>
+            <label>Address</label>
+            <input
+              type="text"
+              placeholder="Enter Address..."
+              name="address"
+              value={formData.address}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
           <div className={styles["column"]}>
             <div className={styles["input-box"]}>
               <label>Zip Code</label>
-              <input type="number" placeholder="Enter Zip..." required />
+              <input
+                type="number"
+                placeholder="Enter Zip..."
+                name="zip_code"
+                value={formData.zip_code}
+                onChange={handleInputChange}
+                required
+              />
             </div>
             <div className={styles["input-box"]}>
               <label>Phone No</label>
-              <input type="number" placeholder="Enter Number..." required />
+              <input
+                type="number"
+                placeholder="Enter Number..."
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                required
+              />
             </div>
           </div>
-          
+
           <div className={styles["column"]}>
-          <div className={styles["input-box"]}>
+            <div className={styles["input-box"]}>
               <label>Computer Engineering</label>
-              <input type="number" placeholder="Enter Percent..." required />
+              <input
+                type="number"
+                placeholder="Enter Percent..."
+                name="comp"
+                value={formData.comp}
+                onChange={handleInputChange}
+                required
+              />
             </div>
             <div className={styles["input-box"]}>
               <label>Mechanical Engineering</label>
-              <input type="number" placeholder="Enter Percent..." required />
+              <input
+                type="number"
+                placeholder="Enter Percent..."
+                name="mech"
+                value={formData.mech}
+                onChange={handleInputChange}
+                required
+              />
             </div>
           </div>
           <div className={styles["column"]}>
             <div className={styles["input-box"]}>
               <label>Electrical and Electronic Engineering</label>
-              <input type="number" placeholder="Enter Date..." required />
+              <input
+                type="number"
+                placeholder="Enter Date..."
+                name="entc"
+                value={formData.entc}
+                onChange={handleInputChange}
+                required
+              />
             </div>
             <div className={styles["input-box"]}>
               <label>Chemical Engineering</label>
-              <input type="number" placeholder="Enter Percent..." required />
+              <input
+                type="number"
+                placeholder="Enter Percent..."
+                name="chemical"
+                value={formData.chemical}
+                onChange={handleInputChange}
+                required
+              />
             </div>
           </div>
           <div className={styles["column"]}>
             <div className={styles["input-box"]}>
               <label>Civil Engineering</label>
-              <input type="number" placeholder="Enter Percent..." required />
+              <input
+                type="number"
+                placeholder="Enter Percent..."
+                name="civil"
+                value={formData.civil}
+                onChange={handleInputChange}
+                required
+              />
             </div>
             <div className={styles["input-box"]}>
               <label>Infomation Technology</label>
-              <input type="number" placeholder="Enter Percent..." required />
+              <input
+                type="number"
+                placeholder="Enter Percent..."
+                name="it"
+                value={formData.it}
+                onChange={handleInputChange}
+                required
+              />
             </div>
           </div>
-          <div className={styles["column"]}>
-            
-            
-          </div>
+          <div className={styles["column"]}></div>
           {/* <div className={`${styles["input-box"]} ${styles["address"]}`}>
             <label>Deparments</label>
 
@@ -150,7 +267,7 @@ function Index() {
               </div>
             </div>
           </div> */}
-          
+
           <button className="btn-warning">Submit</button>
         </form>
       </section>

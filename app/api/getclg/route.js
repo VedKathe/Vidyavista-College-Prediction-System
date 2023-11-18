@@ -9,7 +9,7 @@ export async function GET(request) {
   });
 
   const insertQuery = `
-            select * from feedback_table
+            select * from college_table
         `;
 
   const { rows } = await pool.query(insertQuery);
