@@ -14,7 +14,7 @@ export async function GET(request){
 
       
         const insertQuery = `
-            select * from feedback_table
+            select * from Feedback
         `;
 
         const {rows} = await pool.query(insertQuery);
