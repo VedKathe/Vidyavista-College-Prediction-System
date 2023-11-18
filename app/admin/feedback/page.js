@@ -35,7 +35,7 @@ function Page() {
       }
     };
     fetchData();
-  }, []);
+  }, [data]);
 
   return (
     <div id="search">
