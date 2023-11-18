@@ -13,16 +13,16 @@ export async function POST(request){
         name,feedback      
       } = PostData;
     
-      const pool = new createPool({
-        connectionString: process.env.POSTGRES_URL, // Your PostgreSQL connection string
-      });
+      // const pool = new createPool({
+      //   connectionString: process.env.POSTGRES_URL, // Your PostgreSQL connection string
+      // });
 
       
-        const insertQuery = `
-            INSERT INTO feedback_table (name,  feedback)
-            VALUES ($1, $2)
-        `;
-        await pool.query(insertQuery, [name, feedback]);
+      //   const insertQuery = `
+      //       INSERT INTO feedback_table (name,  feedback)
+      //       VALUES ($1, $2)
+      //   `;
+      //   await pool.query(insertQuery, [name, feedback]);
    
 
     
