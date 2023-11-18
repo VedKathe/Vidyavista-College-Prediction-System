@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Select from "react-select";
 
 function Page() {
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]);
 
@@ -13,18 +14,18 @@ function Page() {
     setSearchTerm(e.target.value);
   };
 
-  
   // Mock data for the table
-  
+
   // Filter the table data based on the search term
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/getFeedback");
+        const response = await fetch("/api/getFeedback",{cache:'no-cache'});
         if (response.ok) {
           const result = await response.json();
           setData(result);
+          setLoading(false);
           console.log(data);
         } else {
           throw new Error("Failed to fetch data");
@@ -52,7 +53,7 @@ function Page() {
               <thead>
                 <tr>
                   <th className={styles["rows"]}>Name</th>
-                
+
                   <th className={styles["rows"]}>Feedback</th>
                   <th className={styles["rows"]}>Time </th>
                 </tr>
@@ -61,7 +62,7 @@ function Page() {
                 {data.map((item) => (
                   <tr key={item.name}>
                     <td className={styles["rows"]}>{item.name}</td>
-                    
+
                     <td>{item.feedback}</td>
                     <td className={styles["rows"]}>{item.time}</td>
                   </tr>
