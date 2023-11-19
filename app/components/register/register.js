@@ -11,7 +11,7 @@ function Index() {
   //  const [pass, setPass] = React.useState("kathe");
   //   const [user, setUser] = React.useState("vedant");
 
-  // const router = useRouter();
+   const router = useRouter();
 
   const initialFormData = {
     name: "",
@@ -49,6 +49,7 @@ function Index() {
         setFormData(initialFormData);
 
         alert('Form Submitted')
+        router.push('/student')
         console.log("Form submitted successfully");
       } else {
         // Handle errors (e.g., show an error message)
