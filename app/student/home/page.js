@@ -1,26 +1,29 @@
+"use client"
+import React from 'react'
 import Image from 'next/image'
 import styles from './home.module.css'
 import Contact from '../../components/contactus'
 import Navbar from '../../components/navbar2'
 
 
+
 export default function Home() {
+
+  const [username, setUsername] = React.useState("")
+  React.useEffect(() => {
+    let value = localStorage.getItem("username")
+    setUsername(value)
+  }, [])
+  
   return (
     <div>
     <Navbar/>
     <main className={styles.main}>
       <div className={styles.image}>
-        Unlock Your Future
+        Welcome Student
       </div>
       
-      <div className="row mt-5">
-                <div className="col-md-12">
-                    <div className="section-header text-center pt-4">
-                        <h2>Contact Us</h2>
-                    </div>
-                </div>
-      </div>
-      <Contact/>     
+       
     </main>
     </div>
   )

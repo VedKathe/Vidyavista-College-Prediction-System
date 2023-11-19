@@ -10,11 +10,11 @@
   
   .image{
     
-    background-image: url('/slider.jpg');
+    background-image: url('/admin-back.jpg');
     
       vertical-align: middle;
       text-align: center;
-      line-height: 90vh;
+      line-height: 80vh;
       width: 100vw; 
       height: 100vh;
       font-weight: 800;

@@ -50,7 +50,8 @@ function Index({...props}) {
     else{
       axios.post('/api/auth/getlogin',{ email:user , password:pass}).then((response) => {
         console.log(response.data);
-        if (response.data==true){
+        if (response.data.found==true){
+          
           router.push('/student/home')
         }
         else{
