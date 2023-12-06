@@ -7,7 +7,7 @@ import { handleClientScriptLoad } from "next/script";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-
+import { ToastContainer, toast } from 'react-toastify';
 
 function Index({...props}) {
 

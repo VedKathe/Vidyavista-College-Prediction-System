@@ -2,7 +2,7 @@
 import React from 'react'
 import './contact.module.css'
 import { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+
 
 function Index() {
 	const [formData, setFormData] = useState({
