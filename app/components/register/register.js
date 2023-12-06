@@ -6,6 +6,8 @@ import bootstrap from "../../bootstrap.min.css";
 import { handleClientScriptLoad } from "next/script";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Index() {
   //  const [pass, setPass] = React.useState("kathe");
@@ -47,8 +49,18 @@ function Index() {
       if (response.ok) {
         // Handle success (e.g., show a success message)
         setFormData(initialFormData);
-
-        alert('Form Submitted')
+        toast.success('Registertion Successfully', {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          
+          }); 
+        
         router.push('/student')
         console.log("Form submitted successfully");
       } else {
@@ -69,7 +81,7 @@ function Index() {
           backdropFilter: "blur(30px)",
         }}
       >
-        <form action="#" onSubmit={handleSubmit} className={styles["form"]}>
+        <form onSubmit={handleSubmit} className={styles["form"]}>
         <div className={styles["input-box"]}>
               <label>Email</label>
               <input type="text" placeholder="Enter Email..." name="email" value={formData.email} onChange={handleInputChange} required />
@@ -158,6 +170,7 @@ function Index() {
           <button className="btn-warning">Submit</button>
         </form>
       </section>
+      <ToastContainer/>
     </div>
   );
 }

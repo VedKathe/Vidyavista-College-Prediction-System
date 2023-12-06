@@ -6,6 +6,9 @@ import bootstrap from "../../bootstrap.min.css";
 import { handleClientScriptLoad } from "next/script";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function Index() {
   //  const [pass, setPass] = React.useState("kathe");
@@ -93,8 +96,18 @@ function Index() {
       if (response.ok) {
         // Handle success (e.g., show a success message)
         setFormData(initialFormData);
-
-        alert("Form Submitted");
+        toast.success('Registration Successfully', {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+         
+          }); 
+      
         console.log("Form submitted successfully");
       } else {
         // Handle errors (e.g., show an error message)
@@ -271,6 +284,7 @@ function Index() {
           <button className="btn-warning">Submit</button>
         </form>
       </section>
+      <ToastContainer/>
     </div>
   );
 }

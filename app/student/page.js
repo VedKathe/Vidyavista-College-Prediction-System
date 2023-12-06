@@ -4,6 +4,7 @@ import LoginForm from '../components/loginForm/loginForm'
 import styles from './student.module.css'
 import Registration from '../components/register/register'
 
+
 function page() {
   return (
     <div className={styles['main']}>

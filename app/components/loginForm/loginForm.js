@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 function Index({...props}) {
 
  
@@ -137,7 +139,7 @@ function Index({...props}) {
             />
           </div>
 
-          {!isAdmin && <div className=" d-flex row  mt-5 justify-content-center">
+          {!isAdmin && <div className=" d-flex row  mt-4 justify-content-center">
             <div className="col d-flex justify-content-center">
               <a href="/student/register">Register</a>
             </div>
@@ -146,7 +148,7 @@ function Index({...props}) {
               <a href="#!">Forgot password?</a>
             </div>
           </div>}
-          <button className="btn-warning mt-5" >Login</button>
+          <button className="btn-warning mt-4" >Login</button>
           
         </form>
       </section>
