@@ -33,12 +33,43 @@
   margin-bottom: 3rem;
   width: 100%;
   max-width: 700px;
-  justify-content: center;
+  justify-content: left;
 }
 
+.serachBar{
+  display: flex;
+  margin: 20px 0;
+  padding: 0 70px;
+  flex-direction: column;
+  width: 100%;
+}
+
+.fliters{
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  flex-wrap: wrap;
+  gap:2rem
+}
+
+.fliters button {
+  
+  
+  color: #fff;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 10px;
+}
+
+.fliters select{
+  border: transparent;
+  max-width: 10rem;
+}
 .searchbar {
   font-size: 18px;
-
   border-radius: 50px;
 }
 
@@ -103,6 +134,7 @@
   .searchbar {
     font-size: 14px;
   }
+  
 }
 
 /* top-left border-radius */
@@ -124,3 +156,8 @@
 .custom-table tr:last-child td:last-child {
   border-bottom-right-radius: 10px;
 }
+
+
+
+
+

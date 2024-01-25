@@ -26,7 +26,7 @@ function Index({...props}) {
       setadmin(true)
     }
 
-  }, [])
+  }, [isAdmin])
   
   const handleSubmit = (e) => {
     e.preventDefault();

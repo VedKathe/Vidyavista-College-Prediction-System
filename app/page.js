@@ -1,10 +1,15 @@
+
+"use client"
 import Image from 'next/image'
 import styles from './page.module.css'
 import Contact from './components/contactus'
-
+import Navbar from './components/navbar'
+import { useEffect } from 'react'
 export default function Home() {
+  
   return (
     <main className={styles.main}>
+      <Navbar Nav="1" />
       <div className={styles.image}>
         Unlock Your Future
       </div>

@@ -1,0 +1,51 @@
+/* Basic styles for the multi-select container */
+.multi-select {
+  font-family: Arial, sans-serif;
+  width: 300px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+/* Styles for the search input */
+.multi-select input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Styles for the options container */
+.multi-select .options-container {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Style for individual options */
+.multi-select label {
+  display: block;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+/* Style for the checkbox */
+.multi-select input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* Style when checkbox is disabled */
+.multi-select input[type="checkbox"]:disabled + span {
+  color: #999;
+}
+
+/* Style when option is selected */
+.multi-select label input[type="checkbox"]:checked + span {
+  font-weight: bold;
+}
+
+/* Custom styles (you can customize further) */
+/* Example: Changing background color of selected options */
+.multi-select label input[type="checkbox"]:checked + span {
+  background-color: #e2eefd;
+}

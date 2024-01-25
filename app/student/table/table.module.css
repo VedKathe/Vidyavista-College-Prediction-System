@@ -1,0 +1,43 @@
+/* Basic styling for layout, adjust as needed */
+
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  
+  .filters {
+    width: 250px;
+    margin-right: 20px;
+  }
+  
+  .filters h2,
+  .table h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .filters label,
+  .filters input {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .table {
+    flex-grow: 1;
+  }
+  
+  .container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .container table th,
+ .container table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
