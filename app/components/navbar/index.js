@@ -9,8 +9,7 @@ import axios from "axios";
 import { getServerSession } from "next-auth";
 
 export default async function Index({...props}) {
-    const session = getServerSession();
-    console.log(session);
+    
     // const [isAdmin, setisAdmin] = useState(false);
     const {Nav} = props
     useEffect(() => {
