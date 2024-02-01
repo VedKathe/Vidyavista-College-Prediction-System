@@ -1,4 +1,4 @@
-'use client'
+
 
 import React from "react";
 import Link from "next/link";
@@ -6,8 +6,11 @@ import './navbar.module.css'
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import { getServerSession } from "next-auth";
 
-export default function Index({...props}) {
+export default async function Index({...props}) {
+    const session = getServerSession();
+    console.log(session);
     // const [isAdmin, setisAdmin] = useState(false);
     const {Nav} = props
     useEffect(() => {

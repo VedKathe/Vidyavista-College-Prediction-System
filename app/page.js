@@ -5,7 +5,9 @@ import styles from './page.module.css'
 import Contact from './components/contactus'
 import Navbar from './components/navbar'
 import { useEffect } from 'react'
+import { getServerSession } from 'next-auth'
 export default function Home() {
+
   
   return (
     <main className={styles.main}>

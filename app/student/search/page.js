@@ -7,12 +7,15 @@ import Select from "react-select";
 import SearchBar from "../../components/searchbar";
 import Multiselect from "multiselect-react-dropdown";
 import CheckBoxOption from "../../components/checkboxoption";
+import { useRouter } from "next/navigation";
 
 function Page() {
+  const router = useRouter();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]);
   const [tableData, setTableData] = useState(data);
-  const [selectedCategory, setSelectedCategory] = useState([]); // State for selected category
+  const [selectedCategory, setSelectedCategory] = useState([]); // State for selected Department
   const [selectedCity, setSelectedCity] = useState([]);
   const [cites, setCites] = useState([]);
   const [order, setOrder] = useState(false);
@@ -59,7 +62,7 @@ function Page() {
     const convertedArray = selectedItems.map((name) => shortcuts[name]);
     setSelectedCategory(convertedArray);
     
-    // Update selected category when the select value changes
+    // Update selected Department when the select value changes
   };
 
   
@@ -67,20 +70,20 @@ function Page() {
   const handleSelectCity = (selectedItems) => {
     //console.log(sel);
     setSelectedCity(selectedItems);
-    // Update selected category when the select value changes
+    // Update selected Department when the select value changes
   };
 
   const handleSortByPercent = (e) => {
     // setTableData(
     //   tableData.sort((a, b) => {
     //     if (order) {
-    //       return a.percent - b.percent;
+    //       return a.Rank - b.Rank;
     //     } else {
-    //       return b.percent - a.percent;
+    //       return b.Rank - a.Rank;
     //     }
     //   })
     // );
-    // Update selected category when the select value changes
+    // Update selected Department when the select value changes
     
     setOrder(!order);
   };
@@ -101,17 +104,32 @@ function Page() {
     setTableData(filtered); // Update filtered data state
   };
 
+  const saveStateAndGenerateURL= () => {
+    // Serialize state (convert to JSON)
+    const serializedState = JSON.stringify({order,selectedCategory,selectedCity});
+  
+    // Encode state for URL
+    const encodedState = encodeURIComponent(serializedState);
+  
+    // Generate new URL
+    const newURL = `save-table?state=${encodedState}`;
+  
+    // return newURL;
+    console.log(newURL);
+    router.push(newURL);
+
+  }
   // useEffect(() => {
-  //   // Filter table data based on selected category
+  //   // Filter table data based on selected Department
   //   // if (selectedCategory) {
   //   //   const filteredData = data.filter((item) => {
-  //   //     // Check if any selected category has a value greater than or equal to 85
-  //   //     return selectedCategory.some((category) => item[category] >= 85);
+  //   //     // Check if any selected Department has a value greater than or equal to 85
+  //   //     return selectedCategory.some((Department) => item[Department] >= 85);
   //   //   });
   //   //   console.log(filteredData);
   //   //   setTableData(filteredData);
   //   // } else {
-  //   //   setTableData(data); // If no category is selected, show all data
+  //   //   setTableData(data); // If no Department is selected, show all data
   //   // }
   // }, [selectedCategory]);
 
@@ -120,28 +138,28 @@ function Page() {
     if (selectedCategory.length > 0) {
       let rows = [];
       data.forEach((item) => {
-        selectedCategory.forEach((category) => {
-          if (item[category]) {
+        selectedCategory.forEach((Department) => {
+          if (item[Department]) {
             rows.push({
               name: item.name,
-              category: category,
+              Department: Department,
               address: item.address,
               phone: item.phone,
-              percent: item[category],
+              Rank: item[Department],
             });
           }
         });
       });
       let filterData = rows.filter((item) => {
-        // Check if any selected category has a value greater than or equal to 85
-        return item.percent >= 85;
+        // Check if any selected Department has a value greater than or equal to 85
+        return item.Rank >= 85;
       });
 
        filterData = filterData.sort((a, b) => {
         if (order) {
-          return a.percent - b.percent;
+          return a.Rank - b.Rank;
         } else {
-          return b.percent - a.percent;
+          return b.Rank - a.Rank;
         }
       })
     
@@ -159,10 +177,11 @@ function Page() {
       // setTableData(rows);
     } else {
       console.log("Not");
-      setFilteredData([]); // If no category is selected, show all data
+      setFilteredData([]); // If no Department is selected, show all data
     }
   };
 
+  
   
 
   useEffect(() => {
@@ -224,7 +243,7 @@ function Page() {
               </select> */}
               <CheckBoxOption
                 options={categoryOptions}
-                name="Category"
+                name="Department"
                 selectedItems={selectedCategory}
                 onSelectionChange={handleCategoryChange}
               ></CheckBoxOption>
@@ -236,7 +255,10 @@ function Page() {
                 name="City"
               ></CheckBoxOption>
               <button className="btn btn-warning" onClick={handleSortByPercent}>
-                Sort by Percent
+                Sort by Rank
+              </button>
+              <button className="btn btn-warning" onClick={saveStateAndGenerateURL}>
+                Save
               </button>
               {/* <Select className={styles.searchbar} onChange={handleSelectChange} placeholder='Select Department...' value={selectedCategory} options={options} /> */}
             </div>
@@ -247,9 +269,9 @@ function Page() {
               <thead>
                 <tr>
                   <th>Collage Name</th>
-                  <th>Category</th>
+                  <th>Department</th>
                   <th>Address</th>
-                  <th>Percent</th>
+                  <th>Rank</th>
                   <th>Phone</th>
                 </tr>
               </thead>
@@ -257,9 +279,9 @@ function Page() {
                 {tableData.map((item) => (
                   <tr key={item.name}>
                     <td>{item.name}</td>
-                    <td>{item.category}</td>
+                    <td>{item.Department}</td>
                     <td>{item.address}</td>
-                    <td>{item.percent}</td>
+                    <td>{item.Rank}</td>
                     <td>{item.phone}</td>
                   </tr>
                 ))}
