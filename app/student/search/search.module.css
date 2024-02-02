@@ -36,7 +36,7 @@
   justify-content: left;
 }
 
-.serachBar{
+.searchBar{
   display: flex;
   margin: 20px 0;
   padding: 0 70px;
@@ -48,7 +48,7 @@
   padding-top: 1rem;
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap:2rem
 }
@@ -62,6 +62,10 @@
   cursor: pointer;
   transition: all 0.2s ease;
   border-radius: 10px;
+}
+
+.fliters button:last-child{
+  margin-left: auto;
 }
 
 .fliters select{
@@ -131,10 +135,24 @@
   .custom-table {
     font-size: 12px;
   }
-  .searchbar {
-    font-size: 14px;
-  }
   
+
+  .searchBar {
+    font-size: 14px;
+   
+    padding: 0 20px;
+  }
+  .fliters button:last-child{
+    margin-left:0;
+    
+  }
+  .fliters{
+    padding-top: 1rem;
+    font-size: 14px;
+    justify-content: center;
+    gap: 1rem;
+  }
+
 }
 
 /* top-left border-radius */

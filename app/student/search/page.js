@@ -181,7 +181,25 @@ function Page() {
     }
   };
 
-  
+  async function handleFilters(){
+    try {
+      const response = await fetch("/api/getClgData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({searchTerm,selectedCategory,selectedCity}),
+      });
+      if (response.ok) {
+        console.log( await response.json());
+      } else {
+        throw new Error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+
+  }
   
 
   useEffect(() => {
@@ -227,20 +245,10 @@ function Page() {
 
       <div className={styles["main"]}>
         <div className={styles.container}>
-          <div className={styles["serachBar"]}>
+          <div className={styles["searchBar"]}>
             <SearchBar handleChange={handleSearchChange} />
             <div className={styles["fliters"]}>
-              {/* <select
-                onChange={handleSelectCity}
-                placeholder="Select City..."
-                value={selectedCity}
-              >
-                {city.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </select> */}
+              
               <CheckBoxOption
                 options={categoryOptions}
                 name="Department"
@@ -257,11 +265,15 @@ function Page() {
               <button className="btn btn-warning" onClick={handleSortByPercent}>
                 Sort by Rank
               </button>
+              
               <button className="btn btn-warning" onClick={saveStateAndGenerateURL}>
-                Save
+                Share
               </button>
-              {/* <Select className={styles.searchbar} onChange={handleSelectChange} placeholder='Select Department...' value={selectedCategory} options={options} /> */}
+              <button className="btn btn-danger" onClick={handleFilters}>
+                Apply Filter
+              </button>
             </div>
+            
           </div>
           <div>Collage Found:{tableData.length}</div>
           <div className={styles["table"]}>
