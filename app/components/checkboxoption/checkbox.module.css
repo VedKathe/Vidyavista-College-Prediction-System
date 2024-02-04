@@ -1,4 +1,13 @@
 /* Basic styles for the multi-select container */
+
+.labelList {
+  background-color: #999;
+  justify-content: center;
+  text-align: center;
+}
+
+
+
 .multi-select {
   font-family: Arial, sans-serif;
   width: 300px;

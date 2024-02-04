@@ -8,6 +8,7 @@ import { useState } from "react";
 import axios from "axios";
 import { getServerSession } from "next-auth";
 
+
 export default function Index({...props}) {
     
     // const [isAdmin, setisAdmin] = useState(false);
@@ -23,7 +24,7 @@ export default function Index({...props}) {
     
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+    <nav className="navbar navbar-expand-lg navbar-light .bg-light.bg-gradient fixed-top ">
       <div className="container">
         <a className="navbar-brand" href="#">
           <span className="text-warning">Vidya</span>vista

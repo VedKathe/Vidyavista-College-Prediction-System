@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import "./checkbox.module.css"
+
 
 const MultiSelectDropdown = ({options,name,selectedItems, onSelectionChange}) => {
   const [allSelectedItems, setAllSelectedItems] = useState([]);
@@ -36,9 +38,9 @@ const MultiSelectDropdown = ({options,name,selectedItems, onSelectionChange}) =>
       >
         Select {name}
       </button>
-      <ul className="dropdown-menu" aria-labelledby="multiSelectDropdown">
+      <ul className="dropdown-menu  " aria-labelledby="multiSelectDropdown">
         {options.map((option) => (
-          <li key={option}>
+          <li key={option} >
             <label>
               <input className="m-2" type="checkbox" value={option} 
               onChange={() => handleCheckboxChange(option)} />

@@ -8,10 +8,10 @@ import SearchBar from "../../components/searchbar";
 import Multiselect from "multiselect-react-dropdown";
 import CheckBoxOption from "../../components/checkboxoption";
 import { useRouter } from "next/navigation";
+import { PiShareNetwork } from "react-icons/pi";
 
 function Page() {
   const router = useRouter();
-
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]);
   const [tableData, setTableData] = useState(data);
@@ -48,45 +48,39 @@ function Page() {
     "Information Technology",
   ];
 
-  const city = [
-    { value: "nashik", label: "Nashik" },
-    { value: "pune", label: "Pune" },
-    { value: "mumbai", label: "Mumbai" },
-    { value: "nagpur", label: "Nagpur" },
-  ];
-
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
   const handleCategoryChange = (selectedItems) => {
     const convertedArray = selectedItems.map((name) => shortcuts[name]);
     setSelectedCategory(convertedArray);
-    
+
     // Update selected Department when the select value changes
   };
-
-  
 
   const handleSelectCity = (selectedItems) => {
     //console.log(sel);
     setSelectedCity(selectedItems);
     // Update selected Department when the select value changes
   };
-
-  const handleSortByPercent = (e) => {
-    // setTableData(
-    //   tableData.sort((a, b) => {
-    //     if (order) {
-    //       return a.Rank - b.Rank;
-    //     } else {
-    //       return b.Rank - a.Rank;
-    //     }
-    //   })
-    // );
-    // Update selected Department when the select value changes
+  const handleSortByRankLow = (e) => {
+    console.log("PRess");
+    setTableData(tableData.sort((a,b)=>{
+      return a.Rank - b.Rank;
+    }))
+    setOrder(true);
+  }
+  const handleSortByRankHigh = (e) => {
+    console.log("pressed");
+    setTableData(tableData.sort((a,b)=>{
+      return b.Rank - a.Rank;
+    }))
     
-    setOrder(!order);
-  };
+    setOrder(false);
+  }
+
+
+  
 
   const filterData = (query, cities, department, order) => {
     let filtered = data.filter((item) =>
@@ -104,21 +98,24 @@ function Page() {
     setTableData(filtered); // Update filtered data state
   };
 
-  const saveStateAndGenerateURL= () => {
+  const saveStateAndGenerateURL = () => {
     // Serialize state (convert to JSON)
-    const serializedState = JSON.stringify({order,selectedCategory,selectedCity});
-  
+    const serializedState = JSON.stringify({
+      order,
+      selectedCategory,
+      selectedCity,
+    });
+
     // Encode state for URL
     const encodedState = encodeURIComponent(serializedState);
-  
+
     // Generate new URL
     const newURL = `save-table?state=${encodedState}`;
-  
+
     // return newURL;
     console.log(newURL);
     router.push(newURL);
-
-  }
+  };
   // useEffect(() => {
   //   // Filter table data based on selected Department
   //   // if (selectedCategory) {
@@ -155,25 +152,24 @@ function Page() {
         return item.Rank >= 85;
       });
 
-       filterData = filterData.sort((a, b) => {
+      filterData = filterData.sort((a, b) => {
         if (order) {
           return a.Rank - b.Rank;
         } else {
           return b.Rank - a.Rank;
         }
-      })
-    
+      });
+
       if (selectedCity) {
-          
-          filterData = filterData.filter((item) => selectedCity.includes(item.address));
-          
+        filterData = filterData.filter((item) =>
+          selectedCity.includes(item.address)
+        );
       }
-      
 
       setFilteredData(filterData);
-   
-      filterData = []
-      rows=[]
+
+      filterData = [];
+      rows = [];
       // setTableData(rows);
     } else {
       console.log("Not");
@@ -181,36 +177,25 @@ function Page() {
     }
   };
 
-  async function handleFilters(){
+  async function handleFilters() {
     try {
       const response = await fetch("/api/getClgData", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({searchTerm,selectedCategory,selectedCity}),
+        body: JSON.stringify({ selectedCategory, selectedCity }),
       });
       if (response.ok) {
-        console.log( await response.json());
+        const result = await response.json();
+        setTableData(result);
       } else {
         throw new Error("Failed to fetch data");
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-
   }
-  
-
-  useEffect(() => {
-    console.log(selectedCategory);
-    generateRows();
-    
-  }, [selectedCategory,order,selectedCity]);
-
-  useEffect(()=>{
-    setTableData(filteredData)
-  },[filteredData])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -218,8 +203,7 @@ function Page() {
         const response = await fetch("/api/getclg");
         if (response.ok) {
           const result = await response.json();
-          setData(result);
-          setTableData(data);
+
           result.map((o) => {
             setCites((cites) => {
               const updatedCities = new Set([...cites, o.address]);
@@ -248,7 +232,6 @@ function Page() {
           <div className={styles["searchBar"]}>
             <SearchBar handleChange={handleSearchChange} />
             <div className={styles["fliters"]}>
-              
               <CheckBoxOption
                 options={categoryOptions}
                 name="Department"
@@ -262,36 +245,69 @@ function Page() {
                 onSelectionChange={handleSelectCity}
                 name="City"
               ></CheckBoxOption>
-              <button className="btn btn-warning" onClick={handleSortByPercent}>
-                Sort by Rank
-              </button>
-              
-              <button className="btn btn-warning" onClick={saveStateAndGenerateURL}>
+
+              {/* Sort By */}
+              <div className="dropdown">
+                <button
+                  className="btn btn-warning dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Sort by...
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li>
+                    <a
+                      className="dropdown-item"
+                      
+                      onClick={handleSortByRankLow}
+                    >
+                      Rank (Low to High)
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="dropdown-item"
+                      
+                      onClick={handleSortByRankHigh}
+                    >
+                      Rank (High to Low)
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <button
+                className="btn btn-warning"
+                onClick={saveStateAndGenerateURL}
+              >
                 Share
+                <PiShareNetwork className="ms-1 fs-5" />
               </button>
               <button className="btn btn-danger" onClick={handleFilters}>
                 Apply Filter
               </button>
             </div>
-            
           </div>
           <div>Collage Found:{tableData.length}</div>
           <div className={styles["table"]}>
             <table className={styles["custom-table"]}>
               <thead>
                 <tr>
-                  <th>Collage Name</th>
-                  <th>Department</th>
-                  <th>Address</th>
-                  <th>Rank</th>
-                  <th>Phone</th>
+                  <th className="text-center">Collage Name</th>
+                  <th className="text-center">Department</th>
+                  <th className="text-center">Address</th>
+                  <th className="text-center">Rank</th>
+                  <th className="text-center">Phone</th>
                 </tr>
               </thead>
               <tbody>
-                {tableData.map((item) => (
-                  <tr key={item.name}>
+                {tableData.map((item,i) => (
+                  <tr key={i}>
                     <td>{item.name}</td>
-                    <td>{item.Department}</td>
+                    <td className="text-capitalize">{item.Department}</td>
                     <td>{item.address}</td>
                     <td>{item.Rank}</td>
                     <td>{item.phone}</td>
