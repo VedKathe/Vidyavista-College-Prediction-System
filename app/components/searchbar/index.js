@@ -9,8 +9,8 @@ const [input, setInput] = useState("");
     <div className={styles["input-wrapper"]}>
       <FaSearch id="search-icon" />
       <input
-        placeholder="Type to search..."
-        
+        placeholder="Enter your Rank..."
+        type="number"
         onChange={handleChange}
       />
     </div>

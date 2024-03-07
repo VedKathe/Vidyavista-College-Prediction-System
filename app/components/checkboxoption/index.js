@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./checkbox.module.css"
+import styles from "./checkbox.module.css"
 
 
 const MultiSelectDropdown = ({options,name,selectedItems, onSelectionChange}) => {
@@ -38,10 +38,10 @@ const MultiSelectDropdown = ({options,name,selectedItems, onSelectionChange}) =>
       >
         Select {name}
       </button>
-      <ul className="dropdown-menu  " aria-labelledby="multiSelectDropdown">
+      <ul className="dropdown-menu" style={{ maxHeight: "300px", overflowY: "auto" }} aria-labelledby="multiSelectDropdown">
         {options.map((option) => (
           <li key={option} >
-            <label>
+            <label className={styles['menu-text']}>
               <input className="m-2" type="checkbox" value={option} 
               onChange={() => handleCheckboxChange(option)} />
               {option}

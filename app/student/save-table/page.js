@@ -12,9 +12,16 @@ export default function Page() {
   const searchParams = useSearchParams();
   const [tableState, setTableState] = useState(null);
   const [tableData, setTableData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
+  
   const [showButton, setShowButton] = useState(true);
-
+  //NEW
+  const states = searchParams.get("state");
+  const parsedState = JSON.parse(states);
+  const { order, selectedDept, selectedCity ,selectedSeats,sortOrder,sortOption , searchTerm} = parsedState;
+        
+  const [sortOptions, setSortOption] = useState(sortOption);
+  const [sortOrders, setSortOrder] = useState(sortOrder);
+ 
   const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
 
   const options = {
@@ -39,21 +46,31 @@ export default function Page() {
    
  };
  
+
+ const handleSort = option => {
+  if (sortOptions === option) {
+    setSortOrder(sortOrders === 'asc' ? 'desc' : 'asc');
+  } else {
+    setSortOption(option);
+    setSortOrder('asc');
+  }
+};
+
  // you can use a function to return the target element besides using React refs
  const getTargetElement = () => document.getElementById('content-id');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const states = searchParams.get("state");
-        const parsedState = JSON.parse(states);
-        const { order, selectedCategory, selectedCity } = parsedState;
+        // const states = searchParams.get("state");
+        // const parsedState = JSON.parse(states);
+        // const { order, selectedDept, selectedCity ,selectedSeats,sortOrder,sortOption , searchTerm} = parsedState;
         const response = await fetch("/api/getClgData", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ order, selectedCategory, selectedCity }),
+          body: JSON.stringify({ order, selectedDept, selectedCity }),
         });
         if (response.ok) {
           const result = await response.json();
@@ -69,34 +86,85 @@ export default function Page() {
     fetchData();
   }, []);
 
- 
+  let filteredData =
+  searchTerm.trim() === ""
+    ? tableData
+    : tableData
+        .filter((item) => {
+          return selectedSeats.some((option) => {
+            const value = parseInt(item[option]); // Parse as integer
+            return isNaN(value) ? false : value >= parseInt(searchTerm);
+          });
+        })
+        .filter((item) =>
+          selectedSeats.some((option) => parseInt(item[option]))
+        );
+
+        if (sortOptions !== "") {
+          filteredData = filteredData.sort((a, b) => {
+            const valueA = a[sortOptions];
+            const valueB = b[sortOptions];
+            if (sortOrders === "asc") {
+              return valueA - valueB;
+            } else {
+              return valueB - valueA;
+            }
+          });
+        }
+
   return (
     <div className="page">
     <div className={styles["table"]}>
     Final List
     <div id="content-id" style={{width:"100%",justifyContent:'center'}}>
-      <table className={styles["custom-table"]}>
-        <thead>
-          <tr>
-            <th className="text-center">Collage Name</th>
-            <th className="text-center">Department</th>
-            <th className="text-center">Address</th>
-            <th className="text-center">Rank</th>
-            <th className="text-center">Phone</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableData.map((item, i) => (
-            <tr key={i}>
-              <td>{item.name}</td>
-              <td className="text-capitalize">{item.Department}</td>
-              <td>{item.address}</td>
-              <td>{item.Rank}</td>
-              <td>{item.phone}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <table className={styles["custom-table"]}>
+              <thead>
+                <tr>
+                  <th className="text-center">Code</th>
+                  <th className="text-center">Collage Name</th>
+                  <th className="text-center">Department</th>
+                  <th className="text-center">City</th>
+
+                  {selectedSeats.map((option) => (
+                    <th key={option} className="text-center" onClick={() => handleSort(option)}>
+                    {option.toUpperCase()} {sortOptions === option && (sortOrders === 'asc' ? '▲' : '▼')}
+                  </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {/* {tableData.map((item, i) => (
+                  <tr key={i}>
+                    <td>{item.institute_code}</td>
+                    <td>{item.institute_name}</td>
+                    <td className="text-capitalize">{item.departments}</td>
+                    <td>{item.city}</td>
+                    {selectedSeats.map((option) => (
+                      <td key={option}>{item[option]}</td>
+                    ))}
+                  </tr>
+                ))} */}
+                {filteredData.map((item, i) => {
+                  const shouldRenderRow = selectedSeats.some((option) =>
+                    parseInt(item[option])
+                  );
+                  return shouldRenderRow ? (
+                    <tr key={i}>
+                      <td>{item.institute_code}</td>
+                      <td>{item.institute_name}</td>
+                      <td className="text-capitalize">{item.departments}</td>
+                      <td>{item.city}</td>
+                      {/* Dynamically render selected options as table cells */}
+                      {selectedSeats.map((option) => (
+                        <td key={option}>
+                          {isNaN(parseInt(item[option])) ? null : item[option]}
+                        </td>
+                      ))}
+                    </tr>
+                  ) : null;
+                })}
+              </tbody>
+            </table>
       </div>
       {showButton && <button className="btn btn-danger" onClick={() => generatePDF(getTargetElement, options)}>Print</button>}
     </div>

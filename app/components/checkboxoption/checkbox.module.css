@@ -7,7 +7,6 @@
 }
 
 
-
 .multi-select {
   font-family: Arial, sans-serif;
   width: 300px;
@@ -57,4 +56,10 @@
 /* Example: Changing background color of selected options */
 .multi-select label input[type="checkbox"]:checked + span {
   background-color: #e2eefd;
+}
+
+
+.menu-text{
+
+  white-space: nowrap;
 }
