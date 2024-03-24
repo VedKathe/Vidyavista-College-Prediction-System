@@ -1,3 +1,11 @@
+In Progess Output
+
+![Screenshot 2024-03-24 212318](https://github.com/VedKathe/Vidyavista-College-Prediction-System/assets/96811754/d76f9f53-7a5f-4385-a418-337ece182bca)
+![Screenshot 2024-03-24 212329](https://github.com/VedKathe/Vidyavista-College-Prediction-System/assets/96811754/7c01d396-dbe7-4d45-b235-7741ae50a7fb)
+![Screenshot 2024-03-24 212424](https://github.com/VedKathe/Vidyavista-College-Prediction-System/assets/96811754/1b038d11-4917-48e6-993e-d82fa31f28e7)
+![Screenshot 2024-03-24 212531](https://github.com/VedKathe/Vidyavista-College-Prediction-System/assets/96811754/0192cc72-a3c7-4958-8762-5b78f77df39f)
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
