@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
-import Navbar from "../../components/navbar3";
+import Navbar from "../../components/navbar";
+import PasswordItem from "../../components/password_show";
+
 import styles from "./user.module.css";
 import { useEffect, useState } from "react";
 import Select from "react-select";
@@ -8,7 +10,11 @@ import Select from "react-select";
 function Page() {
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -22,7 +28,6 @@ function Page() {
     { value: "it", label: "Information Technology" },
   ];
   // Mock data for the table
-  
 
   // Filter the table data based on the search term
 
@@ -33,7 +38,7 @@ function Page() {
         if (response.ok) {
           const result = await response.json();
           setData(result);
-          console.log(data);
+         
         } else {
           throw new Error("Failed to fetch data");
         }
@@ -44,9 +49,13 @@ function Page() {
     fetchData();
   }, []);
 
+  const handleItemDeleted = (deletedItemId) => {
+    setData(data.filter(user => user.email !== deletedItemId));
+  };
+
   return (
     <div id="search">
-      <Navbar />
+      <Navbar Nav="3"/>
 
       <div className={styles["main"]}>
         <div className={styles.container}>
@@ -65,12 +74,13 @@ function Page() {
                   <th className={styles["rows"]}>Phone</th>
                   <th>Address</th>
                   <th className={styles["rows"]}>DOB </th>
-                  <th className={styles["rows"]}>Percent </th>
+                  <th className={styles["rows"]}>Rank </th>
+                  <th className={styles["rows"]}>Password </th>
                 </tr>
               </thead>
               <tbody>
-                {data.map((item) => (
-                  <tr key={item.name}>
+                {data.map((item,index) => (
+                  <tr key={index}>
                     <td>{item.name}</td>
                     <td>{item.email}</td>
                     <td className={styles["rows"]}>{item.gender}</td>
@@ -78,6 +88,7 @@ function Page() {
                     <td>{item.address}</td>
                     <td className={styles["rows"]}>{item.dob}</td>
                     <td className={styles["rows"]}>{item.percent}</td>
+                    <PasswordItem item={item} onItemDeleted={handleItemDeleted} ></PasswordItem>
                   </tr>
                 ))}
               </tbody>

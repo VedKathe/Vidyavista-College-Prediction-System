@@ -1,16 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styles from "./register.module.css";
 import bootstrap from "../../bootstrap.min.css";
 import { handleClientScriptLoad } from "next/script";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from 'react-toastify';
-
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import Select from "react-select";
+import "react-toastify/dist/ReactToastify.css";
+import Dropdown from "react-bootstrap/Dropdown";
 
 function Index() {
+
   //  const [pass, setPass] = React.useState("kathe");
   //   const [user, setUser] = React.useState("vedant");
 
@@ -57,30 +59,38 @@ function Index() {
   //     console.error("Error submitting form:", error);
   //   }
   // };
+  const depts =['Artificial Intelligence and Data Science','Civil Engineering','Computer Engineering','Chemical Engineering','Electrical Engineering','Electronics & Telecom Engineering','Information Technology','Mechanical Engineering']
 
 
   const initialFormData = {
+    clg_code: "",
     name: "",
-    address: "",
-    zip_code: "",
-    phone: "",
-    comp: "",
-    it: "",
-    civil: "",
-    mech: "",
-    entc: "",
-    chemical: "",
+    dept: "",
+    city: "",
+    gopen: "",
+    gscs: "",
+    gsts: "",
+    gvjs: "",
+    gnt1s: "",
+    gnt2s: "",
+    gnt3s: "",
+    gobcs: "",
+    tfws: "",
+    ews: "",
   };
 
   const [formData, setFormData] = React.useState(initialFormData);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+   
     setFormData({
       ...formData,
       [name]: value,
     });
   };
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -96,7 +106,7 @@ function Index() {
       if (response.ok) {
         // Handle success (e.g., show a success message)
         setFormData(initialFormData);
-        toast.success('Registration Successfully', {
+        toast.success("Registration Successfully", {
           position: "bottom-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -105,9 +115,8 @@ function Index() {
           draggable: true,
           progress: undefined,
           theme: "colored",
-         
-          }); 
-      
+        });
+
         console.log("Form submitted successfully");
       } else {
         // Handle errors (e.g., show an error message)
@@ -128,47 +137,94 @@ function Index() {
         }}
       >
         <form action="#" onSubmit={handleSubmit} className={styles["form"]}>
-          <div className={styles["input-box"]}>
-            <label>Collage Name</label>
-            <input
-              type="text"
-              placeholder="Enter Collage..."
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className={styles["input-box"]}>
-            <label>Address</label>
-            <input
-              type="text"
-              placeholder="Enter Address..."
-              name="address"
-              value={formData.address}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
           <div className={styles["column"]}>
             <div className={styles["input-box"]}>
-              <label>Zip Code</label>
+              <label>Collage Name</label>
               <input
-                type="number"
-                placeholder="Enter Zip..."
-                name="zip_code"
-                value={formData.zip_code}
+                type="text"
+                placeholder="Enter Collage..."
+                name="name"
+                value={formData.name}
                 onChange={handleInputChange}
                 required
               />
             </div>
             <div className={styles["input-box"]}>
-              <label>Phone No</label>
+              <label>Deparments</label>
+
+              <select className={styles["select"]} name="dept" onChange={handleInputChange}>
+                {depts.map((_,index)=>(
+                  <option key={index} value={_}>{_}</option>
+                ))}
+                
+              </select>
+            </div>
+          </div>
+          <div className={styles["column"]}>
+            <div className={styles["input-box"]}>
+              <label>Collage Code</label>
               <input
                 type="number"
-                placeholder="Enter Number..."
-                name="phone"
-                value={formData.phone}
+                placeholder="Enter Code..."
+                name="clg_code"
+                value={formData.clg_code}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className={styles["input-box"]}>
+              <label>City</label>
+              <input
+                type="text"
+                placeholder="Enter City..."
+                name="city"
+                value={formData.city}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className={styles["input-box"]}>
+              <label>EWS</label>
+              <input
+                type="number"
+                placeholder="Enter Rank..."
+                name="ews"
+                value={formData.ews}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+          </div>
+          <div className={styles["column"]}>
+            <div className={styles["input-box"]}>
+              <label>GOPEN</label>
+              <input
+                type="number"
+                placeholder="Enter Rank..."
+                name="gopen"
+                value={formData.gopen}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className={styles["input-box"]}>
+              <label>GSCS</label>
+              <input
+                type="number"
+                placeholder="Enter Rank..."
+                name="gscs"
+                value={formData.gscs}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className={styles["input-box"]}>
+              <label>GSTS</label>
+              <input
+                type="number"
+                placeholder="Enter Rank..."
+                name="gsts"
+                value={formData.gsts}
                 onChange={handleInputChange}
                 required
               />
@@ -177,71 +233,70 @@ function Index() {
 
           <div className={styles["column"]}>
             <div className={styles["input-box"]}>
-              <label>Computer Engineering</label>
+              <label>GVJS</label>
               <input
                 type="number"
-                placeholder="Enter Percent..."
-                name="comp"
-                value={formData.comp}
+                placeholder="Enter Rank..."
+                name="gvjs"
+                value={formData.gvjs}
                 onChange={handleInputChange}
                 required
               />
             </div>
             <div className={styles["input-box"]}>
-              <label>Mechanical Engineering</label>
+              <label>GNT1S</label>
               <input
                 type="number"
-                placeholder="Enter Percent..."
-                name="mech"
-                value={formData.mech}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-          </div>
-          <div className={styles["column"]}>
-            <div className={styles["input-box"]}>
-              <label>Electrical and Electronic Engineering</label>
-              <input
-                type="number"
-                placeholder="Enter Date..."
-                name="entc"
-                value={formData.entc}
+                placeholder="Enter Rank..."
+                name="gnt1s"
+                value={formData.gnt1s}
                 onChange={handleInputChange}
                 required
               />
             </div>
             <div className={styles["input-box"]}>
-              <label>Chemical Engineering</label>
+              <label>GNT2S</label>
               <input
                 type="number"
-                placeholder="Enter Percent..."
-                name="chemical"
-                value={formData.chemical}
+                placeholder="Enter Rank..."
+                name="gnt2s"
+                value={formData.gnt2s}
                 onChange={handleInputChange}
                 required
               />
             </div>
           </div>
+          <div className={styles["column"]}></div>
           <div className={styles["column"]}>
             <div className={styles["input-box"]}>
-              <label>Civil Engineering</label>
+              <label>GNT3S</label>
               <input
                 type="number"
-                placeholder="Enter Percent..."
-                name="civil"
-                value={formData.civil}
+                placeholder="Enter Rank..."
+                name="gnt3s"
+                value={formData.gnt3s}
                 onChange={handleInputChange}
                 required
               />
             </div>
             <div className={styles["input-box"]}>
-              <label>Infomation Technology</label>
+              <label>GOBCS</label>
               <input
                 type="number"
-                placeholder="Enter Percent..."
-                name="it"
-                value={formData.it}
+                placeholder="Enter Rank..."
+                name="gobcs"
+                value={formData.gobcs}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className={styles["input-box"]}>
+              <label>TFWS</label>
+              <input
+                type="number"
+                placeholder="Enter Rank..."
+                name="tfws"
+                value={formData.tfws}
                 onChange={handleInputChange}
                 required
               />
@@ -284,7 +339,7 @@ function Index() {
           <button className="btn-warning">Submit</button>
         </form>
       </section>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }

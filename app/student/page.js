@@ -12,7 +12,7 @@ function page() {
   return (
     <div className={styles['main']}>
       
-      <Navbar Nav="1" />
+      <Navbar Nav="1"/>
         <div className={styles['back']}>Student Login</div>
         <LoginForm/>
     </div>

@@ -1,14 +1,14 @@
 import React from 'react'
 import Contact from '../../components/contactus'
 import styles from './feedback.module.css'
-import Navbar from '../../components/navbar2'
+import Navbar from '../../components/navbar'
 
 function Page() {
  
 
   return (
 	<div>
-		<Navbar/>
+		<Navbar Nav="2"/>
     <div className={styles['feedback']}>
 		<div className="row mt-5">
                 <div className="col-md-12">

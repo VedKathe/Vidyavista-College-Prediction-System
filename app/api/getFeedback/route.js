@@ -13,7 +13,7 @@ export async function GET(request) {
         `;
 
   const { rows } = await pool.query(insertQuery);
-
+  
   //Close connection
 
   return NextResponse.json(rows, { status: "200" });

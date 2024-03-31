@@ -24,7 +24,7 @@ export default function Index({...props}) {
     
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light .bg-light.bg-gradient fixed-top ">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light bg-gradient fixed-top ">
       <div className="container">
         <a className="navbar-brand" href="#">
           <span className="text-warning">Vidya</span>vista

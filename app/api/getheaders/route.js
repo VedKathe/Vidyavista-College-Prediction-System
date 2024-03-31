@@ -11,8 +11,8 @@ const pool = new Pool({
 export async function GET(request) {
   const client = await pool.connect();
     
-  const response = await client.query('SELECT Institute_Code, Institute_Name, Departments, GOPENS, GSCS, GSTS, GVJS, GNT1S, GNT2S, GNT3S, GOBCS, TFWS, EWS, City FROM institute_info');
-  const rows = response.rows;
+    const response = await client.query('SELECT DISTINCT Departments,City FROM institute_info ');
+    const rows = response.rows;
  
 
   

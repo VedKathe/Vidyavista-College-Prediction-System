@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Navbar from "../../components/navbar3";
+import Navbar from "../../components/navbar";
 import styles from "./view.module.css";
 import { useEffect, useState } from "react";
 import Select from "react-select";
@@ -8,12 +8,73 @@ import Select from "react-select";
 function Page() {
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]);
-
+  const [sortOption, setSortOption] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [selectedSeats, setselectedSeats] = useState([
+    "gopens",
+    "gscs",
+    "gsts",
+    "gvjs",
+    "gnt1s",
+    "gnt2s",
+    "gnt3s",
+    "gobcs",
+    "tfws",
+    "ews",
+  ]);
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  
+  const handleSort = (option) => {
+    if (sortOption === option) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortOption(option);
+      setSortOrder("asc");
+    }
+  };
+
+  let filteredData =
+    searchTerm.trim() === ""
+      ? data
+      : data
+          .filter((item) => {
+            return selectedSeats.some((option) => {
+              const value = parseInt(item[option]); // Parse as integer
+              return isNaN(value) ? false : value >= parseInt(searchTerm);
+            });
+          })
+          .filter((item) =>
+            selectedSeats.some((option) => parseInt(item[option]))
+          );
+
+  if (sortOption !== "") {
+    filteredData = filteredData.sort((a, b) => {
+      const valueA = a[sortOption];
+      const valueB = b[sortOption];
+      if (typeof valueA === "string" && typeof valueB === "string") {
+        // For string comparison, especially if case-insensitivity is desired
+        if (sortOrder === "asc") {
+          return valueA.localeCompare(valueB, undefined, {
+            sensitivity: "base",
+          });
+        } else {
+          return valueB.localeCompare(valueA, undefined, {
+            sensitivity: "base",
+          });
+        }
+      } else {
+        // For numeric comparison
+        if (sortOrder === "asc") {
+          return valueA - valueB;
+        } else {
+          return valueB - valueA;
+        }
+      }
+    });
+  }
+
   // Filter the table data based on the search term
 
   useEffect(() => {
@@ -23,7 +84,7 @@ function Page() {
         if (response.ok) {
           const result = await response.json();
           setData(result);
-          console.log(data);
+         
         } else {
           throw new Error("Failed to fetch data");
         }
@@ -36,7 +97,7 @@ function Page() {
 
   return (
     <div id="search">
-      <Navbar />
+      <Navbar Nav="3"/>
 
       <div className={styles["main"]}>
         <div className={styles.container}>
@@ -49,34 +110,71 @@ function Page() {
             <table className={styles["custom-table"]}>
               <thead>
                 <tr>
-                  <th>Collage Name</th>
+                <th
+                    className="text-center"
+                    onClick={() => handleSort("institute_code")}
+                  >
+                    Code{" "}
+                    {sortOption === "institute_code" &&
+                      (sortOrder === "asc" ? "▲" : "▼")}
+                  </th>
+                  <th
+                    className="text-center"
+                    onClick={() => handleSort("institute_name")}
+                  >
+                    Collage Name{" "}
+                    {sortOption === "institute_name" &&
+                      (sortOrder === "asc" ? "▲" : "▼")}
+                  </th>
+                  <th
+                    className="text-center"
+                    onClick={() => handleSort("departments")}
+                  >
+                    Department{" "}
+                    {sortOption === "departments" &&
+                      (sortOrder === "asc" ? "▲" : "▼")}
+                  </th>
+                  <th
+                    className="text-center"
+                    onClick={() => handleSort("city")}
+                  >
+                    City{" "}
+                    {sortOption === "city" && (sortOrder === "asc" ? "▲" : "▼")}
+                  </th>
 
-                  <th className={styles["rows"]}>Zip Code</th>
-                  <th className={styles["rows"]}>Phone</th>
-                  <th>Address</th>
-                  <th className={styles["rows"]}>Computer </th>
-                  <th className={styles["rows"]}>Civil </th>
-                  <th className={styles["rows"]}>Mech</th>
-                  <th className={styles["rows"]}>ENTC</th>
-                  <th className={styles["rows"]}>IT</th>
-                  <th className={styles["rows"]}>Chemical</th>
+                  {selectedSeats.map((option) => (
+                    <th
+                      key={option}
+                      className="text-center"
+                      onClick={() => handleSort(option)}
+                    >
+                      {option.toUpperCase()}{" "}
+                      {sortOption === option &&
+                        (sortOrder === "asc" ? "▲" : "▼")}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                {data.map((item) => (
-                  <tr key={item.name}>
-                    <td>{item.name}</td>
-                    <td className={styles["rows"]}>{item.zip_code}</td>
-                    <td className={styles["rows"]}>{item.phone}</td>
-                    <td>{item.address}</td>
-                    <td className={styles["rows"]}>{item.comp}</td>
-                    <td className={styles["rows"]}>{item.civil}</td>
-                    <td className={styles["rows"]}>{item.mech}</td>
-                    <td className={styles["rows"]}>{item.entc}</td>
-                    <td className={styles["rows"]}>{item.it}</td>
-                    <td className={styles["rows"]}>{item.chemical}</td>
-                  </tr>
-                ))}
+                {filteredData.map((item, i) => {
+                  const shouldRenderRow = selectedSeats.some((option) =>
+                    parseInt(item[option])
+                  );
+                  return shouldRenderRow ? (
+                    <tr key={i}>
+                      <td>{item.institute_code}</td>
+                      <td>{item.institute_name}</td>
+                      <td className="text-capitalize">{item.departments}</td>
+                      <td>{item.city}</td>
+                      {/* Dynamically render selected options as table cells */}
+                      {selectedSeats.map((option) => (
+                        <td key={option}>
+                          {isNaN(parseInt(item[option])) ? null : item[option]}
+                        </td>
+                      ))}
+                    </tr>
+                  ) : null;
+                })}
               </tbody>
             </table>
           </div>

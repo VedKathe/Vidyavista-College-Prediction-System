@@ -1,9 +1,9 @@
 "use client";
 import React, { use } from "react";
-import Navbar from "../../components/navbar2";
+import Navbar from "../../components/navbar";
 import styles from "./search.module.css";
 import { useEffect, useState } from "react";
-import Select from "react-select";
+
 import SearchBar from "../../components/searchbar";
 import Multiselect from "multiselect-react-dropdown";
 import CheckBoxOption from "../../components/checkboxoption";
@@ -222,7 +222,7 @@ function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/getclg");
+        const response = await fetch("/api/getheaders");
         if (response.ok) {
           const result = await response.json();
           console.log(result);
@@ -251,7 +251,7 @@ function Page() {
 
   return (
     <div id="search">
-      <Navbar />
+      <Navbar Nav="2"/>
 
       <div className={styles["main"]}>
         <div className={styles.container}>

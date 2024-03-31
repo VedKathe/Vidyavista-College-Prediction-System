@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Navbar from "../../components/navbar3";
+import Navbar from "../../components/navbar";
 import styles from "./feedback.module.css";
 import { useEffect, useState } from "react";
 import Select from "react-select";
@@ -39,7 +39,7 @@ function Page() {
 
   return (
     <div id="search">
-      <Navbar />
+      <Navbar Nav="3"/>
 
       <div className={styles["main"]}>
         <div className={styles.container}>

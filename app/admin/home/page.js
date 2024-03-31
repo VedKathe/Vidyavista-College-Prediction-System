@@ -8,13 +8,11 @@ export default function Home() {
   return (
     <div>
     <Navbar Nav="3"/>
-    <main className={styles.main}>
+    <div className={styles.main}>
       <div className={styles.image}>
         Welcome Admin
-      </div>
-      
-          
-    </main>
+      </div>    
+    </div>
     </div>
   )
 }

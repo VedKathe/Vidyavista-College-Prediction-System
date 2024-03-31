@@ -126,8 +126,8 @@ function Index() {
               <input type="date" placeholder="Enter Date..." name="dob" value={formData.dob} onChange={handleInputChange} required />
             </div>
             <div className={styles["input-box"]}>
-              <label>Percent</label>
-              <input type="number" placeholder="Enter Percent..." name="percent" value={formData.percent} onChange={handleInputChange} required />
+              <label>Rank</label>
+              <input type="number" placeholder="Enter Rank..." name="percent" value={formData.percent} onChange={handleInputChange} required />
             </div>
           </div>
           <div className={styles["column"]}>
