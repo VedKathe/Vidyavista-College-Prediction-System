@@ -10,7 +10,6 @@ import { ToastContainer, toast } from "react-toastify";
 import Select from "react-select";
 import "react-toastify/dist/ReactToastify.css";
 
-
 function Index() {
 
   //  const [pass, setPass] = React.useState("kathe");
