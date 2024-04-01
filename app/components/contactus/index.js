@@ -2,14 +2,16 @@
 import React from 'react'
 import './contact.module.css'
 import { useState } from 'react';
+import { ToastContainer, toast } from "react-toastify";
 
+function Index({handleToast}) {
 
-function Index() {
-	const [formData, setFormData] = useState({
-		name: '',
-		email: '',
-		feedback: '',		
-	  });
+	const initailForm ={
+	name: '',
+	email: '',
+	message: '',}
+
+	const [formData, setFormData] = useState(initailForm);
 	
 	  const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -22,20 +24,29 @@ function Index() {
 	  const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-		  const response = await fetch('/api/setFeedback', {
+		  const response = await fetch('/api/setContact', {
 			method: 'POST',
 			headers: {
 			  'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(formData),
-		  }).then(()=>{
-			
-		  });
+		  })
 	
 		  if (response.ok) {
 			// Handle success (e.g., show a success message)
 			console.log('Form submitted successfully');
-			alert("Form submitted successfully")
+			toast.success("Message Successfully", {
+				position: "bottom-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
+			  });
+			
+			
 		  } else {
 			// Handle errors (e.g., show an error message)
 			console.error('Form submission failed');
@@ -45,6 +56,7 @@ function Index() {
 		}
 	  };
   return (
+	<div>
     <section id="contact" className="contact section-padding">
         <div className="container  mb-5 ">
             
@@ -64,16 +76,19 @@ function Index() {
 							</div>
 							<div className="col-md-12">
 								<div className="mb-3">
-									<textarea className="form-control" placeholder="Message" name='feedback' onChange={handleInputChange} required rows="3"></textarea>
+									<textarea className="form-control" placeholder="Message" name='message' onChange={handleInputChange} required rows="3"></textarea>
 								</div>
 							</div><button className="btn btn-warning btn-lg btn-block mt-3" type="submit">Send Now</button>
 						</div>
 					</form>
 				</div>
 			</div>
+			
 		</div>
 		
       </section>
+	  
+	  </div>
   )
 }
 

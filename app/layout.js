@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.css'
 import './globals.css'
 import "@fortawesome/fontawesome-free/css/all.min.css"
+import "react-toastify/dist/ReactToastify.css";
 import Footer from './components/footer'
 import BootstrapClient from "./components/BootstrapClient"
 const inter = Inter({ subsets: ['latin'] })

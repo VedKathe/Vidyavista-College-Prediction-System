@@ -110,6 +110,11 @@ export default function Index({...props}) {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" href="/admin/contactus">
+                View Contact
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" href="/">
                 Logout
               </Link>

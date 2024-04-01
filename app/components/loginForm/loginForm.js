@@ -70,7 +70,7 @@ function Index({ ...props }) {
       // });
       // console.log(responce);
       axios
-        .post("/api/auth/register", { email: user, password: pass })
+        .post("/api/auth/getlogin", { email: user, password: pass })
         .then((response) => {
           console.log(response.data);
           if (response.data.found == true) {
@@ -87,6 +87,8 @@ function Index({ ...props }) {
               //   router.push("/student/home");
               // },
             });
+            
+            router.push('/student/home')
           } else {
             toast.error("Wrong Email or Password", {
               position: "bottom-center",
@@ -100,7 +102,7 @@ function Index({ ...props }) {
             });
           }
         });
-      router.push('/student/home')
+     
     }
   };
 
