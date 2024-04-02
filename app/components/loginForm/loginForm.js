@@ -74,6 +74,8 @@ function Index({ ...props }) {
         .then((response) => {
           console.log(response.data);
           if (response.data.found == true) {
+            
+            localStorage.setItem('username',response.data.data.name)
             toast.success("Login Successfully", {
               position: "bottom-center",
               autoClose: 5000,

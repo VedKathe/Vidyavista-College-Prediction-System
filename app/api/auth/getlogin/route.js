@@ -15,7 +15,7 @@ export async function POST(request) {
   });
 
   const insertQuery = `
-            select user, email, password_hash from user_table
+            select name, email, password_hash from user_table
         `;
 
   const { rows } = await pool.query(insertQuery);
@@ -31,5 +31,5 @@ export async function POST(request) {
   
   //Close connection
 
-  return NextResponse.json({found:user,data:rows}, { status: "200" });
+  return NextResponse.json({found:user,data:foundUser}, { status: "200" });
 }
