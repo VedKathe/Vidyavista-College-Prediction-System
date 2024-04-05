@@ -49,56 +49,53 @@ function Index() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if(isValidPass){
-      const response = await fetch("/api/auth/registerUser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      
-      if (response.ok) {
-        const json = await response.json()
-        
-        // Handle success (e.g., show a success message)
-        if(json.exist == false){
-        setFormData(initialFormData);
-        toast.success("Registertion Successfully", {
-          position: "bottom-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
+      if (isValidPass) {
+        const response = await fetch("/api/auth/registerUser", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         });
 
-        router.push("/student");
-        console.log("Form submitted successfully");
-      }
-      else {
-        toast.error("User already Exist", {
-          position: "bottom-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      }
+        if (response.ok) {
+          const json = await response.json();
+
+          // Handle success (e.g., show a success message)
+          if (json.exist == false) {
+            setFormData(initialFormData);
+            toast.success("Registertion Successfully", {
+              position: "bottom-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+
+            router.push("/student");
+            console.log("Form submitted successfully");
+          } else {
+            toast.error("User already Exist", {
+              position: "bottom-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+          }
+        } else {
+          // Handle errors (e.g., show an error message)
+          console.error("Form submission failed");
+        }
       } else {
-        // Handle errors (e.g., show an error message)
-        console.error("Form submission failed");
+        window.alert("Check passowrd ");
       }
-    }
-    else{
-      window.alert("Check passowrd ")
-    }
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -126,38 +123,42 @@ function Index() {
             />
           </div>
           <div className={styles["column"]}>
-          <div className={styles["input-box"]}>
-            <label>Password</label>
-            <input
-              type="text"
-              placeholder="Enter Password..."
-              name="password"
-              value={formData.password}
-              onChange={handlePasswordChange}
-              required
-            />
+            <div className={styles["input-box"]}>
+              <label>Password</label>
+              <input
+                type="text"
+                placeholder="Enter Password..."
+                name="password"
+                value={formData.password}
+                onChange={handlePasswordChange}
+                required
+              />
+            </div>
+            <div className={styles["input-box"]}>
+              <label>Conform Password</label>
+              <input
+                type="text"
+                placeholder="Enter Password..."
+                name="passwordAdmin"
+                value={passAgain}
+                onChange={(e) => {
+                  setPassAgain(e.target.value);
+                }}
+                required
+              />
+            </div>
           </div>
-          <div className={styles["input-box"]}>
-            <label>Conform Password</label>
-            <input
-              type="text"
-              placeholder="Enter Password..."
-              name="passwordAdmin"
-              value={passAgain}
-              onChange={(e)=>{setPassAgain(e.target.value)}}
-              required
-            />
-             
-          </div>
-          
-          </div>
-          {(pass || passAgain) && <PasswordChecklist
-              rules={["minLength", "specialChar", "number", "capital","match"]}
+          {(pass || passAgain) && (
+            <PasswordChecklist
+              rules={["minLength", "specialChar", "number", "capital", "match"]}
               minLength={5}
               value={pass}
               valueAgain={passAgain}
-              onChange={(isValid) => {setValidPass(isValid);}}
-            />}
+              onChange={(isValid) => {
+                setValidPass(isValid);
+              }}
+            />
+          )}
           <div className={styles["column"]}>
             <div className={styles["input-box"]}>
               <label>Name</label>
