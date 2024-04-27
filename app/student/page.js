@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 
-import LoginForm from '../components/loginForm/loginForm'
+import LoginForm from '../components/loginForm'
 import styles from './student.module.css'
 import Registration from '../components/register/register'
 import Navbar from '../components/navbar'

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useEffect } from 'react'
-import LoginForm from '../components/loginForm/loginForm'
+import LoginForm from '../components/loginForm'
 import styles from './admin.module.css'
 import Navbar from '../components/navbar'
 
