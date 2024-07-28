@@ -8,9 +8,6 @@ import Navbar from '../components/navbar'
 function page() {
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
-useEffect(()=>{
-    console.log("Admin");
-},[]);
 
   return (
     <div className={styles['main']}>
