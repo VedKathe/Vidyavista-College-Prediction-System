@@ -49,7 +49,5 @@ export async function POST(request) {
       // Handle the case where user is successfully inserted
   }
 
-  //Close connection
 
-  return NextResponse.json({ message: "Feedback Done" }, { status: "200" });
 }
